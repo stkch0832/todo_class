@@ -1,0 +1,35 @@
+{% extends "base.html"%}
+
+{% block title %}
+{% if 'create' in request.path %}
+新規作成
+{% else %}
+編集
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<h2 class="text-center my-5">
+    {% if 'create' in request.path %}
+    新規作成
+    {% else %}
+    編集
+    {% endif %}
+</h2>
+<div class="container w-50 mx-auto my-5 p-5 border">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-end">
+            <a href="{% url 'app:list'%}" class="btn btn-secondary">キャンセル</a>
+            <button type="submit" class="btn btn-primary">
+                {% if 'create' in request.path %}
+                新規作成
+                {% else %}
+                更新
+                {% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
