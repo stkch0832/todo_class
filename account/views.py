@@ -16,7 +16,7 @@ def register(request):
     if user_form.is_valid():
         try:
             user_form.save()
-            return redirect('account:index')
+            return redirect('app:list')
         except ValidationError as e:
             user_form.add_error('password', e)
     return render(request, 'account/register_form.html', context={
@@ -39,7 +39,7 @@ def user_login(request):
                 if user.is_active:
                     login(request, user)
                     messages.success(request, 'ログインが完了しました')
-                    return redirect('account:index')
+                    return redirect('app:list')
                 else:
                     messages.error(request, 'アカウントがアクティブではありません')
                     return redirect('account:login')
